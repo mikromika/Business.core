@@ -3,7 +3,7 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
-    "type": "project",
+    "type": "project-mikromika",
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
@@ -20,7 +20,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-              "Core\\": "../packages/core"
+              "Component\\": "component/"
 
         }
     },
@@ -31,7 +31,8 @@
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "php -r \"file_exists('version') || copy('version', '.env.version');\""
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
