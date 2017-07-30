@@ -1,2 +1,2 @@
-    'version' => env('APP_VERSION', '0.0.7.1'),
-    'branch' => env('APP_DEV_BRANCH', 'master'),
+    'version' => env('APP_VERSION', '0.0.8.1'),
+    'branch' => env('APP_DEV_BRANCH', '0.0.8'),
