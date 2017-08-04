@@ -41,6 +41,14 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+
+$envFile = '.env';
+// change $envFile conditionally here
+$app->loadEnvironmentFrom($envFile);
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
