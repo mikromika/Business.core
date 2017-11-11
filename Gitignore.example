@@ -1,0 +1,14 @@
+/doc
+/node_modules
+/bck
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+../document
+../*.tgz
+.*
+composer.*
+/bin
+vendor/*
