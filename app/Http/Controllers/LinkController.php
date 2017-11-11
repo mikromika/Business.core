@@ -53,28 +53,7 @@ class LinkController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-  /**  public function store(array $data)
-    {
-      return ('validate done');
-        //protected function create(array $data)
-        dd ($data);
-        return Link::create([
-          'link_desc' => $data['link_desc'],
-          'link_addr' => $data['link_addr'],
-
-          ]);
-          //return view('forms.links');
-            return ('saved data');
-    }  */
-
-
-    /**
+     /**
      * Display the specified resource.
      *
      * @param  \App\odel  $odel

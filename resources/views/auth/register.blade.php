@@ -10,7 +10,6 @@
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
-
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <label for="username" class="col-md-4 control-label">username</label>
 
@@ -66,6 +65,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="role" class="col-md-4 control-label">User role</label>
+
+                            <div class="col-md-6">
+                                <select id="role" class="form-control" name="role" required>
+                                @foreach($roles as $id => $role)
+                                    <option value="{{$id}}">{{$role}}</option>
+                                @endforeach
+                                </select>
+
+                                @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('nickname') ? ' has-error' : '' }}">
                             <label for="nickname" class="col-md-4 control-label">Nick name</label>
 
@@ -79,10 +96,6 @@
                                 @endif
                             </div>
                         </div>
-
-
-
-
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

@@ -2,12 +2,12 @@
 
 return [
 
-  'name' => ('huhuu'),
+  'name' => ('Mikromike'),
   'version' => (''),
   'pri_ver' => ('0'),
   'major_ver'=> ('0'),
-  'minor_ver'=> ('6'),
-  'patch_level'=>('r21')
+  'minor_ver'=> ('9'),
+  'patch_level'=>('r17')
 
 
   ];

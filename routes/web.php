@@ -1,19 +1,12 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+/// public view for posts-index
+
+Route::get('/posts/public', 'PostController@all');
 
 // ------------------------------------------------------
 // Auth::routes(); Are
@@ -60,8 +53,53 @@ Route::post('register', [
   'uses' => 'Auth\RegisterController@register'
 ]);
 // -----------------
-
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/links', 'LinkController@index')->name('links');
 Route::post('/links', 'LinkController@store')->name('save');
+//----------------------------------
+// Profile
+Route::get('/bio/{profile}', 'ProfileController@index');
+Route::get('/bio/', 'ProfileController@getprofile')->name('profile_dashboard');
+//Route::get('/bio/index', 'ProfileController@index')->name('index');
+//--------------------------------
+// Business area
+//Route::get('/business', '\\Business\Controllers\BusinessController@index')->name('company_index');
+//Route::get('/business/add', '\\Business\Controllers\BusinessController@create');
+//Route::post('/business/add', '\\Business\Controllers\BusinessController@store');
+
+
+
+//----------------------------------
+//Route::get('/posts-index', 'PostController@index');
+Route::get('/posts', 'PostController@index')->name('list_posts');
+Route::group(['prefix' => 'posts'], function () {
+Route::get('/drafts', 'PostController@drafts')
+        ->name('list_drafts')
+        ->middleware('auth');
+Route::get('/show/{id}', 'PostController@show')
+        ->name('show_post');
+Route::get('/create', 'PostController@create')
+        ->name('create_post')
+        ->middleware('can:create-post');
+Route::post('/create', 'PostController@store')
+        ->name('store_post')
+        ->middleware('can:create-post');
+Route::get('/edit/{post}', 'PostController@edit')
+        ->name('edit_post')
+        ->middleware('can:update-post,post');
+Route::post('/edit/{post}', 'PostController@update')
+        ->name('update_post')
+        ->middleware('can:update-post,post');
+    // using get to simplify
+Route::get('/publish/{post}', 'PostController@publish')
+        ->name('publish_post')
+        ->middleware('can:publish-post');
+});
+
+//----------------------------------
+
+//  Profile, Not in use yet
+// Route::get('profile', [
+//  'as' => 'admin.profile',
+//  'uses' => 'Controllers\Admin\UsersController@getProfile'
+// ]);

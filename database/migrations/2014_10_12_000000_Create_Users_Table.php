@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('username')->unique();
             $table->string('password');
-            //$table->string('active');
+            $table->boolean('active')->default(false)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('posts');
         Schema::dropIfExists('users');
     }
 }

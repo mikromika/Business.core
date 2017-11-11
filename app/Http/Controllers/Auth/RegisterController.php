@@ -4,84 +4,75 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Profile;
+Use App\Role;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+  //    protected $redirectTo = '/home';
+        protected $redirectTo = '/';
+    //protected $save_profile = profile;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+public function showRegistrationForm()
+{
+    $roles = Role::orderBy('name')->pluck('name', 'id');
+    return view('auth.register', compact('roles'));
+}
+
     protected function validator(array $data)
     {
+//dd($data); Pass information ok from form
+
         return Validator::make($data, [
-            'username' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'nickname' => 'string|max:255',
-            'middlename' => 'string|max:255',
-          //  'email' => 'required|string|email|max:255|unique:users',
+         'username' => 'required|string|max:255|unique:users',
+          'password' => 'required|string|min:6|confirmed',
+          'firstname' => 'required|string|max:255',
+          'lastname' => 'required|string|max:255',
+          'nickname' => 'string|max:255',
+          'middlename' => 'string|max:255',
+          'role' => 'required|exists:roles,id', // validating role
+
+
 
         ]);
+  //      dd('validator done');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'username' => $data['username'],
+protected function create(array $data)
+{
+    $user = User::create([
+        'username' => $data['username'],
+      //  'email' => $data['email'],
+        'password' => bcrypt($data['password']),
+    ]);
 
-      //      'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+     $profile = Profile::create([          // this works now sava profile information
 
-          return Profile::create([
+    'firstname' => $data['firstname'],
+     'lastname' => $data['lastname'],
+     'nickname' => $data['nickname'],
+     'middlename' => $data['middlename'],
 
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
-            'nickname' => $data['nickname'],
-            'middlename' => $data['middlename'],
+    ]);
+      $profile_type = 'user';
+      $user->profile_types()->attach($profile['profile_type']);
+      $user->roles()->attach($data['role']); // Key to link role_users table; works
+      $user->profiles_U()->attach($profile['id']); // Key to link profile_users table
+    return $user;
+    return $profile;
 
-            ]);
-    }
+}    // saves data users, roles, profiles tables, works fine
+
 }

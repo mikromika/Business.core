@@ -15,12 +15,15 @@
         {
             Schema::create('companies', function (Blueprint $table) {
               $table->increments('id');
-              $table->integer('firm_id');
-              $table->string('Company_name')->unique();
-              $table->string('Reg_nr-');
-              //$table->string('active');
+              $table->string('name')->unique();
+              $table->integer('firm_id')->nullable();
+              $table->integer('reg_nr');  //PRH // international format
+              $table->integer('vat_nr')->nullable();  //PRH
+              $table->string('type');       // Business type; vendor or customer
+              $table->string('category');  // Business field
+              $table->boolean('active')->default(true)->nullable();
+            //  $table->timestamp(established_date)->nullable();
               //$table->FingerPrintToken()
-              //$table->timestamp(Established_date);
               $table->timestamps();
         });
     }

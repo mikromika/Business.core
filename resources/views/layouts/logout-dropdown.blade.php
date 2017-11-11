@@ -1,4 +1,4 @@
-    <ul class="dropdown-menu" role="menu">
+{{--    <ul class="dropdown-menu" role="menu"> --}}
         <li>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
@@ -10,4 +10,4 @@
                 {{ csrf_field() }}
             </form>
         </li>
-    </ul>
+{{--    </ul> --}}

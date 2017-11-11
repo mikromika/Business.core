@@ -15,8 +15,10 @@ class CreateProfilesLocationTable extends Migration
     {
         Schema::create('profiles_location', function (Blueprint $table) {
           $table->increments('id');
-          $table->integer('location_id');
-          $table->integer('profile_id');
+          $table->integer('profile_id')->references('id')->on('profiles')->onDelete('cascade');
+          $table->integer('location_id')->references('id')->on('locations')->onDelete('cascade');
+          
+
         });
     }
 

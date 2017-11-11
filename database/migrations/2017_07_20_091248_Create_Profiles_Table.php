@@ -16,23 +16,23 @@ class CreateProfilesTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
           // profile_id
           $table->increments('id');
-          // link to user table
-          $table->integer('user_id');
-
-          $table->string('nick_name');
+          
+          // uuid unique
+          $table->string('uuid')->nullable();
+          $table->string('firstname');
+          $table->string('middlename')->nullable();
+          $table->string('lastname');
+        //
+          $table->string('nickname')->nullable();
           $table->timestamp('last_login')->nullable();
-          $table->integer('status_id');
+          $table->integer('status_id')->nullable();
           //
-          $table->string('image_path');
-          $table->integer('image_id');
-          $table->string('profile_type');
+          $table->string('image_path')->nullable();
+          $table->integer('image_id')->nullable();
+          $table->string('profile_type')->nullable();
           $table->timestamps();
 
-          // uuid unique
-          $table->string('uuid');
-          $table->string('first_name');
-          $table->string('middle_name');
-          $table->string('last_name');
+
         });
     }
 

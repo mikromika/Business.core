@@ -4,27 +4,35 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\User;
+use App\Role;
 
 class Profile extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'firstname','lastname','nickname' ,'middlename'
-
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array   
-  *  protected $hidden = [
-  *      'password', 'remember_token',
-  *  ];
-     */
+  public function users()
+  {
+        //  return $this->belongsToMany(User::class,'profiles_users');
+          return $this->belongsTo(User::class);
+             }
+
+public function types()
+    {
+
+        return $this->belongsToMany(Profile::class, 'profiles_types');
+
+      }
+
+public function GetProfileId () {
+
+//  $profile = Profile::find($id);
+    //return view ('bio.index', compact('profile'));
+    }
+
+
 }

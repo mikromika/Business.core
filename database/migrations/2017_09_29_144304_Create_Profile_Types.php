@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMemosTable extends Migration
+class CreateProfileTypes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateMemosTable extends Migration
      */
     public function up()
     {
-        Schema::create('memos', function (Blueprint $table) {
-            //
+        Schema::create('profile_types', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->unique();
+            $table->boolean('active')->default(false);
+            $table->unsignedInteger('profile_temp_id');
             $table->timestamps();
         });
     }
@@ -27,8 +29,6 @@ class CreateMemosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('memos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('profile_types');
     }
 }

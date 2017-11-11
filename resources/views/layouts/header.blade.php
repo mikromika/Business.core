@@ -5,13 +5,17 @@
 
 {{-- route will check if logged in and apply correct title for page --}}
     @if (Route::has('login'))
+    <!-- here is comment for route check }-->
           @if (Auth::check())
-<title>Mikromika's homepage dev mode</title>
+          <!-- here is comment as logged in  -->
+<title>DEV_{{ config(('version.name'))}}'</title>
+
           @else
-<title>Mikromika's homepage at Guest mode</title>
+<title>{{ config(('version.name'))}}'s' homepage at Guest mode</title>
           @endif
-@endif         {{--  End of Title check --}}
+   @endif         {{--  End of Title check --}}
 <!-- here is comment as Styles  -->
 
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link href="css/css.common.css" rel="stylesheet" >
+<!-- <link href="css/css.common.css" rel="stylesheet" >     -->
+<!-- here is comment as Styles  -->

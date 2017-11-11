@@ -1,10 +1,11 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+<br>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-primary">
-                <div class="panel-heading"><p> Welcome to Mikromika's homepage</p></div>
+                <div class="panel-heading"><p> Welcome to<p> DEV_{{ config(('version.name'))}}'s homepage</p></div>
                 <div class="panel-body">
                   <!-- route will check if logged in and apply correct content for page -->
 
@@ -13,7 +14,7 @@
                       <div class="title m-b-md">
                         @if (Auth::check())
 
-<p>    At moment, we are running at APP {{ config('version.name'). ('  ') }} </p>
+<p>    At moment, we are running at APP <p>  DEV_{{ config(('version.name')).('  ') }} </p>
 <p>   And Logged in as <b>{{ Auth::user()->username }}</b></p>
 <p>
 
@@ -49,8 +50,11 @@ APP Enviroment: <b>
 
                         @else
                       <div class="title m-b-md">
+                        APP Enviroment: <b>
+                      {{ config('app.env') }} </b><br>
 
-          <p> Mikromika's homepage is under heavy programming   <br>
+          <p>  DEV_{{ config(('version.name'))}}'s'
+          homepage is under heavy programming   <br>
           This latest update from local Git. <br>
           This version source code is not availble until
           final version 1.0.0 </p>
